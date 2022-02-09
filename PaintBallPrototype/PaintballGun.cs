@@ -9,12 +9,12 @@ namespace PaintBallPrototype
     public class PaintballGun
     {
         //fields
-        public const int MAGAZINE_SIZE = 16;
 
         private int balls = 0;
 
         //properties
         public int BallsLoaded { get; private set; }
+        public int MagazineSize { get; private set; } = 16;
         public int Balls
         {
             get { return balls; }
@@ -24,12 +24,22 @@ namespace PaintBallPrototype
                 Reload();
             }
         }
-
+        //Constructor
+        public PaintballGun(int balls, int magaZineSize, bool loaded)
+        {
+            this.balls = balls;
+            MagazineSize = magaZineSize;
+            if(!loaded) { Reload(); }
+        }
+        public PaintballGun() :this (16, 16, true)
+        {
+            Reload();
+        }
         //Methods
         public bool IsEmpty() { return BallsLoaded == 0; }
         public void Reload()
         {
-            if (balls > MAGAZINE_SIZE) { BallsLoaded = MAGAZINE_SIZE; }
+            if (balls > MagazineSize) { BallsLoaded = MagazineSize; }
             else { BallsLoaded = balls; }
         }
         public bool Shoot()
